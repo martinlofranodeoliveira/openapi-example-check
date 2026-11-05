@@ -1,0 +1,64 @@
+{
+  "openapi": "3.1.1",
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "info": { "title": "Synthetic orders", "version": "0" },
+  "paths": {
+    "/orders": {
+      "post": {
+        "operationId": "createOrder",
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/OrderInput" } } }
+        },
+        "responses": {
+          "201": {
+            "description": "Synthetic created order",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Order" } } }
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "operationId": "getOrder",
+        "responses": {
+          "200": {
+            "description": "Synthetic order",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Order" } } }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Line": {
+        "type": "object",
+        "required": ["sku", "quantity"],
+        "properties": {
+          "sku": { "type": "string", "enum": ["SYN-A", "SYN-B"] },
+          "quantity": { "type": "integer", "minimum": 1 }
+        },
+        "additionalProperties": false
+      },
+      "OrderInput": {
+        "type": "object",
+        "required": ["reference", "items"],
+        "properties": {
+          "reference": { "type": "string", "minLength": 1 },
+          "items": { "type": "array", "minItems": 1, "items": { "$ref": "#/components/schemas/Line" } }
+        },
+        "additionalProperties": false
+      },
+      "Order": {
+        "type": "object",
+        "required": ["id", "state", "items"],
+        "properties": {
+          "id": { "type": "string", "readOnly": true },
+          "state": { "type": "string", "enum": ["queued", "done"] },
+          "items": { "type": "array", "minItems": 1, "items": { "$ref": "#/components/schemas/Line" } }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

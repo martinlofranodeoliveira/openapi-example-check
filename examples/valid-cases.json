@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "id": "a-request",
+      "operationId": "createOrder",
+      "kind": "request",
+      "payload": { "reference": "synthetic-reference", "items": [{ "sku": "SYN-A", "quantity": 2 }] }
+    },
+    {
+      "id": "b-created",
+      "operationId": "createOrder",
+      "kind": "response",
+      "status": "201",
+      "payload": { "id": "synthetic-order-1", "state": "queued", "items": [{ "sku": "SYN-A", "quantity": 2 }] }
+    },
+    {
+      "id": "c-read",
+      "operationId": "getOrder",
+      "kind": "response",
+      "status": "200",
+      "payload": { "id": "synthetic-order-1", "state": "done", "items": [{ "sku": "SYN-B", "quantity": 1 }] }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "id": "d-extra",
+      "operationId": "createOrder",
+      "kind": "response",
+      "status": "201",
+      "payload": { "id": "synthetic-order-1", "state": "queued", "items": [{ "sku": "SYN-A", "quantity": 1 }], "extra": "SYNTHETIC_PRIVATE_VALUE" }
+    },
+    {
+      "id": "b-type",
+      "operationId": "createOrder",
+      "kind": "request",
+      "payload": { "reference": "synthetic-reference", "items": [{ "sku": "SYN-A", "quantity": "2" }] }
+    },
+    {
+      "id": "a-missing",
+      "operationId": "createOrder",
+      "kind": "request",
+      "payload": { "items": [{ "sku": "SYN-A", "quantity": 1 }] }
+    },
+    {
+      "id": "c-enum",
+      "operationId": "getOrder",
+      "kind": "response",
+      "status": "200",
+      "payload": { "id": "synthetic-order-1", "state": "SYNTHETIC_PRIVATE_VALUE", "items": [{ "sku": "SYN-A", "quantity": 1 }] }
+    }
+  ]
+}

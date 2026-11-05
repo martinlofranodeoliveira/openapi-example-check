@@ -1,0 +1,28 @@
+{
+  "name": "@lofrano-tecnologia/openapi-example-check",
+  "version": "0.1.0",
+  "description": "Offline checking of explicit JSON body examples against a documented OpenAPI 3.1.1 subset",
+  "license": "MIT",
+  "author": "Lofrano Tecnologia",
+  "homepage": "https://lofranotecnologia.com.br",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martinlofranodeoliveira/openapi-example-check"
+  },
+  "engines": { "node": ">=22" },
+  "type": "commonjs",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "exports": {
+    ".": { "types": "./build/src/index.d.ts", "default": "./build/src/index.js" }
+  },
+  "bin": { "openapi-example-check": "build/src/cli.js" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build --silent && node --test build/test/check.test.js build/test/adversarial.test.js build/test/cli.test.js",
+    "cli": "npm run build --silent && node build/src/cli.js",
+    "demo": "npm run build --silent && node build/src/demo.js"
+  },
+  "dependencies": { "ajv": "8.17.1" },
+  "devDependencies": { "typescript": "7.0.2", "@types/node": "22.20.5" }
+}
